@@ -1,3 +1,48 @@
-target/
-wrapper/
+# .gitignore for Grails 1.2 and 1.3
+
+# web application files
+/web-app/WEB-INF
+/classes
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+portals/sonyliv-cms/atlassian-ide-plugin.xml
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+/stacktrace.log
+/test/reports
+/logs
+
+# project release file
+/*.war
+
+# plugin release file
+/*.zip
+
+# older plugin install locations
+/web-app/plugins
+/web-app/WEB-INF/classes
+
+# "temporary" build files
+/target
+
+# other
+*.iws
+
+out/
+*.ids
+*.iml
 .idea/
