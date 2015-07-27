@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Welcome to Link Sharing</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -78,45 +78,150 @@
 					margin-top: 0;
 				}
 			}
+
+            .mybutton {
+            background-color: #ffffff;
+            }
 		</style>
+        <script>
+
+            var searchApp = angular.module("searchApp",[]);
+
+            searchApp.controller("searchController",function($scope,$http){
+
+                $scope.selectedState="";
+                $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+
+            });
+
+
+
+    </script>
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${GroovySystem.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
+    <div class="container-fluid">
+    <div class="row" style="margin-top:10px;">
+    <div class="col-md-7">
+        <p>Topics side</p>
+    </div>
+    <div class="col-md-5">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+                    <g:form name="loginForm" role="form" class ="form-horizontal" url="[controller:'user',action:'login']">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="emailUsername">Email/Username*</label>
+                            </div>
+                            <div class="col-md-8">
+                                <g:textField id="emailUsername" class="form-control" name="emailUsername" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="password">Password*</label>
+                            </div>
+                            <div class="col-md-8">
+                                <g:passwordField id="password" class="form-control" name="password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-5" style="text-align: right">
+                                <a href="#">Forgot Password</a>
+                            </div>
+                            <div class="col-md-4" style="text-align: right;">
+                                <g:submitButton name="Login" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </g:form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Register</div>
+                <div class="panel-body">
+                    <g:form name="registerForm" role="form" class ="form-horizontal" url="[controller:'user',action:'register']" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="firstName">First Name*</label>
+                            </div>
+                            <div class="col-md-6">
+                                <g:textField id="firstName" class="form-control" name="firstName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="lastName">Last Name*</label>
+                            </div>
+                            <div class="col-md-6">
+                                <g:textField id="lastName" class="form-control" name="lastName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="email">Email*</label>
+                            </div>
+                            <div class="col-md-6">
+                                <g:textField id="email" class="form-control" name="email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="username">Username*</label>
+                            </div>
+                            <div class="col-md-6">
+                                <g:textField id="username" class="form-control" name="username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="password2">Password*</label>
+                            </div>
+                            <div class="col-md-6">
+                                <g:passwordField id="password2" class="form-control" name="password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6" style="text-align: left;">
+                                <label class="control-label" for="confirmPassword">Confirm Password*</label>
+                            </div>
+                            <div class="col-md-6">
+                                <g:passwordField id="confirmPassword" class="form-control" name="confirmPassword" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="photo">Photo</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" id="photo" type="file" name="photo">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-8 col-md-4" style="text-align: right;">
+                                <g:submitButton name="Register" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </g:form>
+                    <g:message code="${flash.message}" args="${flash.args}"
+                               default="${flash.default}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
+
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Search for snippets">
+                <span class="input-group-btn">
+                    <button class="btn .btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn .btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
+                </span>
+            </div>
+
+
+        </div>
 	</body>
 </html>

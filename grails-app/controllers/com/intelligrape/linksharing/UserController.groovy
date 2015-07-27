@@ -1,18 +1,49 @@
 package com.intelligrape.linksharing
 
+import com.intelligrape.linksharing.co.RegisterCO
+import org.springframework.web.servlet.ModelAndView
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+
 class UserController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def userService
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model: [userInstanceCount: User.count()]
+    def index() {
+        Map model=getChainModel()?:[registerCO: new RegisterCO()]
+        render view: "index", model: model
     }
+
+    def login() {
+
+    }
+
+    def register(RegisterCO registerCO) {
+        if(!registerCO.validate())
+        {
+            chain(action: "index",model: [registerCO:registerCO])
+        }
+        try {
+            User user = userService.register(registerCO)
+            String successMessage = "You are successfully registered. Please Login"
+            chain(action: "index",model: [registerCO:new RegisterCO(),successMessage : successMessage ])
+        }
+        catch (Exception e)
+        {
+            String failMessage = "Something went wrong"
+            chain(action: "index",model: [registerCO:registerCO, failMessage : failMessage])
+        }
+
+
+    }
+
+    def profile(User user)
+    {
+        return new ModelAndView("profile", [ user : user ])
+    }
+
 
     def show(User userInstance) {
         respond userInstance

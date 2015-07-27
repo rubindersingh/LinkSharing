@@ -1,21 +1,22 @@
-package com.intelligrape.linksharing
+package com.intelligrape.linksharing.co
 
+import grails.validation.Validateable
 import org.apache.commons.lang.StringUtils
+import org.springframework.web.multipart.MultipartFile
 
-class User {
+/**
+ * Created by rubinder on 24/7/15.
+ */
+@Validateable
+class RegisterCO {
 
+    String firstName
+    String lastName
     String email
     String username
     String password
     String confirmPassword
-    String firstName
-    String lastName
-    Boolean active
-    Boolean admin
-    Date dateCreated
-    Date lastUpdated
-    static hasMany = [topics : Topic, subscriptions : Subscription,reads : ResourceRead, resourceRatings : ResourceRating]
-    static transients = ['confirmPassword']
+    MultipartFile photo
 
     static constraints = {
         email blank: false, nullable: false, email: true, unique: true
