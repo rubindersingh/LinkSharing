@@ -85,14 +85,24 @@
 		</style>
         <script>
 
-            var searchApp = angular.module("searchApp",[]);
+            $(document).ready(function(){
+                $("#search-box").keyup(function(){
+                    //alert("keyup");
+                    $.ajax({
+                        type: "GET",
+                        url: "user/country?value="+$(this).val(),
 
-            searchApp.controller("searchController",function($scope,$http){
-
-                $scope.selectedState="";
-                $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-
+                        beforeSend: function(){
+                            $("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+                        },
+                        success: function(data){
+                            $("#suggesstion-box").show();
+                            data.each()
+                            $("#suggesstion-box").html(data);
+                            $("#search-box").css("background","#FFF");
+                        }
+                    });
+                });
             });
 
 
@@ -214,11 +224,12 @@
 
 
             <div class="input-group">
-                <input type="text" class="form-control" name="q" placeholder="Search for snippets">
+                <input type="text" id="search-box" class="form-control" name="q" placeholder="Search for snippets">
                 <span class="input-group-btn">
                     <button class="btn .btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                     <button class="btn .btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
                 </span>
+                <div id="suggesstion-box"></div>
             </div>
 
 

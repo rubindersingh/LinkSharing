@@ -16,7 +16,7 @@
         <asset:javascript src="bootstrap.min.js"/>
         <asset:javascript src="npm.js"/>
 		<asset:javascript src="application.js"/>
-        <asset:javascript src="angular-1.2.16.js"/>
+        <asset:javascript src="jquery-1.10.2.js"/>
 		<g:layoutHead/>
 	</head>
 	<body>
