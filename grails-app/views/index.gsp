@@ -79,10 +79,9 @@
 				}
 			}
 
-            .mybutton {
-            background-color: #ffffff;
-            }
-		</style>
+
+
+        </style>
         <script>
 
             $(document).ready(function(){
@@ -93,16 +92,40 @@
                         url: "user/country?value="+$(this).val(),
 
                         beforeSend: function(){
-                            $("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+                           // $("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
                         },
                         success: function(data){
+                            $("#country-list").empty();
                             $("#suggesstion-box").show();
-                            data.each()
-                            $("#suggesstion-box").html(data);
+                            for(i=0;i<data.length;i++)
+                            {
+                                $("#country-list").append('<li onClick="alert('+data[i]+')">'+data[i]+'</li>');
+                            }
+                            //$("#suggesstion-box").html(data);
                             $("#search-box").css("background","#FFF");
                         }
                     });
                 });
+
+                $('#query').typeahead({
+                    source : function(query,process)
+                    {
+                       return $.ajax({
+                            type: "GET",
+                            url: "user/country?value="+query,
+                            success: function(data){
+                                console.log(data);
+                                return process(data);
+                            }
+
+                        });
+                    },
+                    items : 10,
+                    minLength : 1
+                });
+
+                $('.tt-query').css('background-color','#fff');
+
             });
 
 
@@ -111,6 +134,29 @@
 	</head>
 	<body>
     <div class="container-fluid">
+        <div class="row" style="margin-top:10px;">
+
+            <div class="well">
+                <form>
+                    <fieldset>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </span>
+                            <input type="text" class="form-control" name="query" id="query" data-provide="typeahead" placeholder="Search" autocomplete="off" spellcheck="false">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </span>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                <button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
+                            </span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
     <div class="row" style="margin-top:10px;">
     <div class="col-md-7">
         <p>Topics side</p>
@@ -118,7 +164,9 @@
     <div class="col-md-5">
         <div class="panel-group">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">Login
+
+                </div>
                 <div class="panel-body">
                     <g:form name="loginForm" role="form" class ="form-horizontal" url="[controller:'user',action:'login']">
                         <div class="form-group">
@@ -223,14 +271,7 @@
     </div>
 
 
-            <div class="input-group">
-                <input type="text" id="search-box" class="form-control" name="q" placeholder="Search for snippets">
-                <span class="input-group-btn">
-                    <button class="btn .btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                    <button class="btn .btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
-                </span>
-                <div id="suggesstion-box"></div>
-            </div>
+
 
 
         </div>

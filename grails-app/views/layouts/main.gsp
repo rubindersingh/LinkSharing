@@ -17,10 +17,32 @@
         <asset:javascript src="npm.js"/>
 		<asset:javascript src="application.js"/>
         <asset:javascript src="jquery-1.10.2.js"/>
+        <asset:javascript src="bootstrap3-typeahead.js"/>
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="linkSharingLogo" class="top" role="banner"><a href="http://localhost:8080/linksharing/"><asset:image src="link-sharing.png" alt="Link Sharing"/><span id="headerLinkSpan">Link Sharing</span></a></div>
+		<div id="linkSharingLogo" class="top" role="banner">
+            <a href="http://localhost:8080/linksharing/"><asset:image src="link-sharing.png" alt="Link Sharing"/><span id="headerLinkSpan">Link Sharing</span></a>
+            <div id="userSection" class="pull-right list-inline">
+                <a href="#"><span class="glyphicon glyphicon-comment"/></a>
+                <a href="#"><span class="glyphicon glyphicon-envelope"/></a>
+                <a href="#"><span class="glyphicon glyphicon-paperclip"/></a>
+                <a href="#"><span class="glyphicon glyphicon-user"/></a>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Rubinder<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Topics</a></li>
+                            <li><a href="#">Posts</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                
+            </div>
+
+        </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

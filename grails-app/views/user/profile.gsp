@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome to Link Sharing</title>
+    <title>Profile</title>
 </head>
 
 <body>

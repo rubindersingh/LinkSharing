@@ -1,6 +1,7 @@
 package com.intelligrape.linksharing
 
 import com.intelligrape.linksharing.co.RegisterCO
+import grails.converters.JSON
 import org.springframework.web.servlet.ModelAndView
 
 import static org.springframework.http.HttpStatus.*
@@ -13,7 +14,7 @@ class UserController {
 
     def index() {
         Map model=getChainModel()?:[registerCO: new RegisterCO()]
-        render view: "index", model: model
+        render view: "index", model: [registerCO: new RegisterCO()]
     }
 
     def login() {
@@ -21,8 +22,10 @@ class UserController {
     }
 
     def country(String value) {
+        println value
 
-        println value;
+
+
 
         List countryList = [
                 "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
@@ -50,22 +53,17 @@ class UserController {
                 "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
                 "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
                 "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
-        ];
-        List filteredList = [];
-       for(String name : countryList)
-       {
-           println name;
-           if(name.toLowerCase().contains(value.toLowerCase()))
-           {
-               filteredList.add(name);
-           }
-       }
-        render filteredList;
+        ]
+        List filteredList = []
+        for (String name : countryList) {
+            //println name;
+            if (name.toLowerCase().contains(value.toLowerCase())) {
+                filteredList.add(name)
+            }
+        }
 
-
-
+        render filteredList as JSON
     }
-
     def register(RegisterCO registerCO) {
         if(!registerCO.validate())
         {
